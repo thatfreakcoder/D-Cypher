@@ -1,252 +1,77 @@
-ROTOR1_CONFIG_ENC = {
-    1: 25,
-    2: 7,
-    3: 12,
-    4: 17,
-    5: 23,
-    6: 13,
-    7: 16,
-    8: 20,
-    9: 19,
-    10: 2,
-    11: 8,
-    12: 26,
-    13: 22,
-    14: 3,
-    15: 21,
-    16: 6,
-    17: 24,
-    18: 11,
-    19: 1,
-    20: 5,
-    21: 14,
-    22: 18,
-    23: 9,
-    24: 4,
-    25: 15,
-    26: 10
-}
+document.addEventListener('DOMContentLoaded', () => {
 
-ROTOR2_CONFIG_ENC = {
-    1: 1,
-    2: 11,
-    3: 17,
-    4: 23,
-    5: 25,
-    6: 7,
-    7: 9,
-    8: 18,
-    9: 14,
-    10: 24,
-    11: 26,
-    12: 2,
-    13: 21,
-    14: 22,
-    15: 16,
-    16: 15,
-    17: 12,
-    18: 13,
-    19: 10,
-    20: 5,
-    21: 8,
-    22: 3,
-    23: 4,
-    24: 6,
-    25: 20,
-    26: 19
-}
+    var encrypt = document.getElementById("encrypted")
+    var decrypt = document.getElementById("decrypted")
 
-ROTOR3_CONFIG_ENC = {
-    1: 26,
-    2: 13,
-    3: 18,
-    4: 22,
-    5: 8,
-    6: 20,
-    7: 19,
-    8: 17,
-    9: 7,
-    10: 4,
-    11: 21,
-    12: 6,
-    13: 10,
-    14: 23,
-    15: 24,
-    16: 9,
-    17: 5,
-    18: 2,
-    19: 15,
-    20: 16,
-    21: 11,
-    22: 25,
-    23: 1,
-    24: 14,
-    25: 12,
-    26: 3
-}
+    function getRotorValues() {
+        rotor1 = parseInt(document.getElementById('rotor1').value)
+        rotor2 = parseInt(document.getElementById('rotor2').value)
+        rotor3 = parseInt(document.getElementById('rotor3').value)
+        return rotor1, rotor2, rotor3
+    }
 
-ROTOR1_CONFIG_DCR = {
-    25: 1,
-    7: 2,
-    12: 3,
-    17: 4,
-    23: 5,
-    13: 6,
-    16: 7,
-    20: 8,
-    19: 9,
-    2: 10,
-    8: 11,
-    26: 12,
-    22: 13,
-    3: 14,
-    21: 15,
-    6: 16,
-    24: 17,
-    11: 18,
-    1: 19,
-    5: 20,
-    14: 21,
-    18: 22,
-    9: 23,
-    4: 24,
-    15: 25,
-    10: 26
-}
-ROTOR2_CONFIG_DCR = {
-    1: 1,
-    11: 2,
-    17: 3,
-    23: 4,
-    25: 5,
-    7: 6,
-    9: 7,
-    18: 8,
-    14: 9,
-    24: 10,
-    26: 11,
-    2: 12,
-    21: 13,
-    22: 14,
-    16: 15,
-    15: 16,
-    12: 17,
-    13: 18,
-    10: 19,
-    5: 20,
-    8: 21,
-    3: 22,
-    4: 23,
-    6: 24,
-    20: 25,
-    19: 26
-}
-ROTOR3_CONFIG_DCR = {
-    26: 1,
-    13: 2,
-    18: 3,
-    22: 4,
-    8: 5,
-    20: 6,
-    19: 7,
-    17: 8,
-    7: 9,
-    4: 10,
-    21: 11,
-    6: 12,
-    10: 13,
-    23: 14,
-    24: 15,
-    9: 16,
-    5: 17,
-    2: 18,
-    15: 19,
-    16: 20,
-    11: 21,
-    25: 22,
-    1: 23,
-    14: 24,
-    12: 25,
-    3: 26
-}
+    function lightBulbOn(alphabet) {
+        div = document.getElementById(alphabet.toUpperCase())
+        div.style.backgroundColor = "red"
+    }
 
-int2word = {
-    1: 'A',
-    2: 'B',
-    3: 'C',
-    4: 'D',
-    5: 'E',
-    6: 'F',
-    7: 'G',
-    8: 'H',
-    9: 'I',
-    10: 'J',
-    11: 'K',
-    12: 'L',
-    13: 'M',
-    14: 'N',
-    15: 'O',
-    16: 'P',
-    17: 'Q',
-    18: 'R',
-    19: 'S',
-    20: 'T',
-    21: 'U',
-    22: 'V',
-    23: 'W',
-    24: 'X',
-    25: 'Y',
-    26: 'Z'
-}
-
-function runRotors(keyCode) {
-    rotor1_in = keyCode
-    rotor1_out = ROTOR1_CONFIG_ENC[rotor1_in]
-    console.log("rotor 1 output: " + rotor1_out);
-    rotor2_in = rotor1_out
-    rotor2_out = ROTOR2_CONFIG_ENC[rotor2_in]
-    console.log("rotor 2 output: " + rotor2_out);
-    rotor3_in = rotor2_out
-    rotor3_out = ROTOR3_CONFIG_ENC[rotor3_in]
-    console.log("rotor 3 output: " + rotor3_out);
-    word = int2word[rotor3_out]
-    console.log("final output: " + word);
-}
-
-function convert(ev) {
-    if (ev.keyCode >= 65 && ev.keyCode <= 90) {
-        var rotor1 = parseInt(document.getElementById("rotor1").value)
-        var rotor2 = parseInt(document.getElementById("rotor2").value)
-        var rotor3 = parseInt(document.getElementById("rotor3").value)
-        console.log("Content Loaded");
-        key_div = document.getElementById((ev.key).toUpperCase())
-        key_int = ev.keyCode - 64
-        console.log(rotor3, rotor2, rotor1, key_div.innerText, key_int);
-        runRotors(key_int);
-        key_div.style.backgroundColor = "red"
-        rotor1 += 1
-        document.getElementById("rotor1").value = rotor1
-        if (rotor1 > 26) {
-            rotor1 = 1
-            rotor2++
-            document.getElementById("rotor1").value = rotor1
-            document.getElementById("rotor2").value = rotor2
+    function temp(rotor1, rotor2, rotor3, keyInt) {
+        r1_in = rotor1 + keyInt
+        if (r1_in > 26) {
+            r1_in -= 26
         }
-        if (rotor2 > 26) {
-            rotor2 = 1
-            rotor3++
-            document.getElementById("rotor2").value = rotor2
-            document.getElementById("rotor3").value = rotor3
+        r1_out = ROTOR1_CONFIG_ENC[r1_in]
+        r2_in = r1_out - rotor2
+        if (r2_in <= 0) {
+            r2_in += rotor2
+        }
+        r2_out = ROTOR2_CONFIG_ENC[r2_in]
+        r3_in = r2_out - rotor3
+        if (r3_in <= 0) {
+            r3_in += rotor3
+        }
+        r3_out = ROTOR3_CONFIG_ENC[r3_in]
+        console.log("Rotor 1 Input: " + r1_in + "\nRotor 1 Output: " + r1_out + "\nRotor 2 Input: " + r2_in + "\nRotor 2 Output: " + r2_out + "\nRotor 3 Input: " + r3_in + "\nRotor 3 Output: " + r3_out);
+        console.log("Final Word: " + int2word[r3_out]);
+        decrypt.value += int2word[r3_out];
+    }
+
+    function turnNextRotor() {
+        document.getElementById('rotor1').value++;
+        if (document.getElementById('rotor1').value > 26) {
+            document.getElementById('rotor1').value = 1;
+            document.getElementById('rotor2').value++;
+        }
+        if (document.getElementById('rotor2').value > 26) {
+            document.getElementById('rotor2').value = 1;
+            document.getElementById('rotor3').value++;
         }
     }
-}
 
-function convertBack(ev) {
-    if (ev.keyCode >= 65 && ev.keyCode <= 90) {
-        key = document.getElementById((ev.key).toUpperCase())
-        key.style.backgroundColor = "yellow"
+    function runEnigma(ev) {
+        if (ev.keyCode >= 65 && ev.keyCode <= 90) {
+            console.log(ev);
+            keyPressed = ev.key.toUpperCase()
+            keyInt = parseInt(ev.keyCode) - 64
+            rotor1, rotor2, rotor3 = getRotorValues()
+            console.log(rotor1, rotor2, rotor3, keyPressed, keyInt)
+            lightBulbOn(keyPressed)
+            temp(rotor1, rotor2, rotor3, keyInt)
+            turnNextRotor()
+        }
     }
-}
 
-document.addEventListener('keydown', convert)
-document.addEventListener('keyup', convertBack)
+    function lightBulbOff(ev) {
+        if (ev.keyCode >= 65 && ev.keyCode <= 90) {
+            div = document.getElementById(ev.key.toUpperCase())
+                // console.log(div);
+            div.style.backgroundColor = "yellow"
+            decrypt.innerText = encrypt.value
+
+        }
+    }
+
+    encrypt.addEventListener('keydown', runEnigma)
+    encrypt.addEventListener('keyup', lightBulbOff)
+
+})
