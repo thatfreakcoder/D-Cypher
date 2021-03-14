@@ -9,3 +9,25 @@ body {
     background-color: black;
     color: blanchedalmond;
 }
+
+.wrapper {
+    display: none;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    color: white;
+    z-index: 9999;
+}
+
+.wrapper p {
+    position: relative;
+    top: 50%;
+    /* left: 50%; */
+}
+
+@media screen and (max-width: 560px) {
+    .wrapper {
+        display: block;
+    }
+}
