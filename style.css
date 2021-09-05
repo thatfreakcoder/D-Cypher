@@ -12,7 +12,7 @@ body {
 
 .wrapper {
     display: none;
-    position: relative;
+    position: fixed;
     width: 100vw;
     height: 100vh;
     background-color: black;
@@ -20,7 +20,7 @@ body {
     z-index: 9999;
 }
 
-.wrapper p {
+.wrapper h1 {
     position: relative;
     top: 50%;
     /* left: 50%; */
